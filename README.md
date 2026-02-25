@@ -4,7 +4,7 @@
 
 This project demonstrates a **microservices-based routing system** that calculates shortest paths between locations and maintains a weighted graph of edges.
 
-- **CoreRouteX (8080)** → Main microservice where users interact. Handles:
+- **CoreRouteX (8080)**  → Main microservice where users interact. Handles:
     - Adding locations
     - Calculating distances (Haversine formula)
     - Sending edges to Routing-Graph
