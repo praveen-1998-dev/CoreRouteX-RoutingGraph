@@ -1,4 +1,4 @@
-# 🚀 CoreRouteX & Routing-Graph Microservices
+#   CoreRouteX & Routing-Graph Microservices
 
 [![Java CI](https://github.com/praveen-1998-dev/CoreRouteX-RoutingGraph/actions/workflows/ci.yml/badge.svg)](https://github.com/praveen-1998-dev/CoreRouteX-RoutingGraph/actions/workflows/ci.yml)
 
@@ -91,7 +91,7 @@ GET http://localhost:8080/api/locations/edges
 Fetches the shortest distance between two locations using the Routing-Graph microservice.
 GET http://localhost:8080/api/locations/shortest-distance?from=A&to=C
 
-## imp core logic ##
+## Important  core logic ##
 
 1️⃣ **AddingEdges**
 
@@ -127,21 +127,21 @@ Demo Ready → All tested functionality works locally without cloud deployment.
 Professional Structure → Clear separation of concerns, layered architecture, and reusable services.
 
 ## Getting Started (Local Development)
-### 1️⃣ Clone and run CoreRouteX (Service 1)
+## 1️⃣ Clone and run CoreRouteX (Service 1)
 
 
-# Clone the repository
+## Clone the repository
 git clone https://github.com/praveen-1998-dev/CoreRouteX-RoutingGraph.git
 cd CoreRouteX-RoutingGraph
-# Run CoreRouteX on port 8080
+## Run CoreRouteX on port 8080
 mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8080"
 
-### 1️⃣ Clone and run graphService (Service 2)
-# Clone the repository
+##  1️⃣ Clone and run graphService (Service 2)
+## Clone the repository
 git clone https://github.com/praveen-1998-dev/RouteX-Graph.git
 cd RouteX-Graph
 
-# Run Routing-Graph on port 8081
+## Run Routing-Graph on port 8081
 mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
 
 
