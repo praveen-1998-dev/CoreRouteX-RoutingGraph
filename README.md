@@ -12,7 +12,7 @@ This project demonstrates a **microservices-based routing system** that calculat
     - Sending edges to Routing-Graph
     - Fetching shortest distance between locations
 
-- **Routing-Graph (8081)** → Helper microservice that stores edges and computes shortest paths using **Dijkstra’s algorithm**. Receives commands from CoreRouteX only.
+- **Routing-Graph (8081)** → Helper microservice that stores edges and computes shortest paths using **Dijkstra’s algorithm**. Receives commands from CoreRouteX.
 
 **Key highlights of this project:**
 - Microservice communication
