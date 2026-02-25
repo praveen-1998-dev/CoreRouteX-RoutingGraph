@@ -1,5 +1,7 @@
 # 🚀 CoreRouteX & Routing-Graph Microservices
 
+[![Java CI](https://github.com/praveen-1998-dev/CoreRouteX-RoutingGraph/actions/workflows/ci.yml/badge.svg)](https://github.com/praveen-1998-dev/CoreRouteX-RoutingGraph/actions/workflows/ci.yml)
+
 ## Project Overview
 
 This project demonstrates a **microservices-based routing system** that calculates shortest paths between locations and maintains a weighted graph of edges.
@@ -52,39 +54,68 @@ All user interactions happen via CoreRouteX (port 8080).
 
 ## CoreRouteX (8080) API Endpoints
 
-1️⃣ Add Location
-Adds a new location with name and latitude/longitude coordinates to the system.
-POST /api/locations
+
+1️⃣ **Add Location**  
+Adds a new location with name and latitude/longitude coordinates to the system.  
+**POST** http://localhost:8080/api/locations  
 Content-Type: application/json
+
+``` JSON
 {
   "name": "A",
   "latitude": 12.9716,
   "longitude": 77.5946
 }
-
+```
 2️⃣ Get All Locations
 Fetches all locations stored in CoreRouteX.
-GET /api/locations
+GET http://localhost:8080/api/locations
 
 3️⃣ Calculate Distance by Coordinates
 Calculates distance (Haversine formula) between two coordinates.
-POST /api/locations/distance?fromLatitude=12.9716&fromLongitude=77.5946&toLatitude=12.9352&toLongitude=77.6245
+POST http://localhost:8080/api/locations/distance?fromLatitude=12.9716&fromLongitude=77.5946&toLatitude=12.9352&toLongitude=77.6245
 
 4️⃣ Calculate Distance by Location Names
 Calculates distance between two existing locations by their names.
-POST /api/locations/distance-by-name?from=A&to=C
+POST http://localhost:8080/api/locations/distance-by-name?from=A&to=B
 
 5️⃣ Send Edge to Routing-Graph
 Sends a weighted edge (from → to with distance) to the Routing-Graph microservice.
-POST /api/locations/send-edge?from=A&to=B&distance=100
+POST http://localhost:8080/api/locations/send-edge?from=A&to=B&distance=5
 
-6️⃣ Get Shortest Distance via Routing-Graph
+6️⃣ Get All Edges from Routing-Graph
+Fetches all edges that have been sent to the Routing-Graph.
+GET http://localhost:8080/api/locations/edges
+
+7️⃣ Get Shortest Distance via Routing-Graph
 Fetches the shortest distance between two locations using the Routing-Graph microservice.
-GET /api/edges/shortest-distance?from=A&to=C
+GET http://localhost:8080/api/locations/shortest-distance?from=A&to=C
 
-Note: Users interact only via CoreRouteX. Routing-Graph handles edge storage and shortest distance calculation in the background.
+## imp core logic ##
+
+1️⃣ **AddingEdges**
+
+- Edges represent direct connections between two locations with a **distance value**.
+- Example:
+    - Add edge A → B = 5 km
+    - Add edge B → C = 4 km
+    - Add edge A → C = 12 km
+
+2️⃣ **Shortest Distance Calculation**
+- When requesting the shortest distance between two locations, Routing-Graph considers **all possible paths**.
+- In the above example:
+    - Direct path A → C = 12 km
+    - Indirect path A → B → C = 5 + 4 = 9 km
+- Routing-Graph returns the **shortest path**, which is **A → B → C (9 km)** in this case.
+
+3️⃣ **User Interaction**
+- Users only interact via CoreRouteX endpoints.
+- Routing-Graph handles edge storage and shortest distance calculation in the background.
+- This allows adding multiple paths and ensures that **the optimal route is always returned** automatically.
+
 
 ## Key Features / Highlights
+
 Haversine Formula → Calculates geographic distances between coordinates.
 Weighted Graph (Routing-Graph) → Stores edges with distances and calculates shortest path using Dijkstra’s algorithm.
 Microservice Communication → CoreRouteX communicates with Routing-Graph via REST API.
@@ -96,13 +127,24 @@ Demo Ready → All tested functionality works locally without cloud deployment.
 Professional Structure → Clear separation of concerns, layered architecture, and reusable services.
 
 ## Getting Started (Local Development)
-Clone the repository
-git clone <repo-url>
-cd core-routex
-Run CoreRouteX:
-    mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8080"
-Run Routing-Graph:
-    mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
+### 1️⃣ Clone and run CoreRouteX (Service 1)
+
+
+# Clone the repository
+git clone https://github.com/praveen-1998-dev/CoreRouteX-RoutingGraph.git
+cd CoreRouteX-RoutingGraph
+# Run CoreRouteX on port 8080
+mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8080"
+
+### 1️⃣ Clone and run graphService (Service 2)
+# Clone the repository
+git clone https://github.com/praveen-1998-dev/RouteX-Graph.git
+cd RouteX-Graph
+
+# Run Routing-Graph on port 8081
+mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"
+
+
 Test APIs
 Use Postman or Swagger to interact with the endpoints.
 Verify adding locations, calculating distances, sending edges, and fetching shortest paths.
