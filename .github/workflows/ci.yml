@@ -1,4 +1,4 @@
-# CI/CD combined workflow
+# CI flow
 name: CoreRouteX CI
 
 on:
