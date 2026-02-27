@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coreroutex-deployment
+  labels:
+    app: coreroutex
+spec:
+  replicas: 2                        # number of pods
+  selector:
+    matchLabels:
+      app: coreroutex
+  template:
+    metadata:
+      labels:
+        app: coreroutex
+    spec:
+      containers:
+        - name: coreroutex
+          image: praveenn1997/core-routex:latest
+          ports:
+            - containerPort: 8080
