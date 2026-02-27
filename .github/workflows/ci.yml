@@ -1,5 +1,5 @@
 # CI/CD combined workflow
-name: CoreRouteX CI/CD
+name: CoreRouteX CI
 
 on:
   push:
@@ -39,8 +39,3 @@ jobs:
         run: |
           docker push praveenn1997/core-routex:latest
 
-      # Deploy to Kubernetes (CD step)
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
